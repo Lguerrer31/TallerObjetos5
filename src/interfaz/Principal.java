@@ -267,7 +267,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
         // TODO add your handling code here:
-
+        
+        int sw = 1;
         if (txtNoCuenta.getText().trim().isEmpty()) {
             Helper.mensaje(null, "Por favor ingrese los datos correctamente", "Error", 2);
             txtNoCuenta.requestFocusInWindow();
@@ -278,10 +279,18 @@ public class Principal extends javax.swing.JFrame {
             Helper.mensaje(null, "Por favor digite los datos correctamente", "Error", 2);
             txtSaldoCuenta.requestFocusInWindow();
         } else {
-            long n, m, o = 0;
+            long n = 0, m = 0, o = 0;
+            
+            try {
             n = Long.parseLong(txtNoCuenta.getText());
             m = Long.parseLong(txtIdentificación.getText());
             o = Long.parseLong(txtSaldoCuenta.getText());
+            } catch(NumberFormatException e) {
+                Helper.mensaje(this, "Ingrese un número valido","Error",2);
+                sw = 0;
+            } 
+            
+            if (sw == 1){
 
             c = new Cuenta(n, m, o);
 
@@ -297,6 +306,7 @@ public class Principal extends javax.swing.JFrame {
             txtInteres.setEditable(true);
             txtIngresar.setEditable(true);
             txtRetirar.setEditable(true);
+            }
 
         }
 
